@@ -1,0 +1,12 @@
+[workspace]
+members = ["hello-world"]
+
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+
+[workspace.dependencies]
+cxx = "1.0"
+cxx-build = "1"
+cmake = "0.1"
