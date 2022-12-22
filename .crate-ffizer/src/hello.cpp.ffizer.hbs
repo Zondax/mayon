@@ -1,0 +1,10 @@
+#include "{{project-name}}/include/hello.h"
+
+#include "{{project-name}}/src/lib.rs"
+
+#include <iostream>
+
+void hello_from_cpp() {
+  hello_from_rust();
+  std::cout << "Hello from C++!" << std::endl;
+}

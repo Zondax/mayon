@@ -1,0 +1,37 @@
+cmake_minimum_required(VERSION 3.12)
+cmake_policy(SET CMP0048 NEW)
+cmake_policy(SET CMP0135 NEW)
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+{{#if hunter}}
+file(GLOB HUNTER_CONFIG "${CMAKE_CURRENT_LIST_DIR}/../cmake/config.cmake")
+include(../cmake/HunterGate.cmake)
+HunterGate(
+    URL "https://github.com/cpp-pm/hunter/archive/v0.24.12.tar.gz"
+    SHA1 "dd581578f2fa63deb89eaf4816fa7a4b3f27dac3"
+    FILEPATH ${HUNTER_CONFIG}
+)
+
+{{/if}}
+project({{project-name}})
+
+# dependencies
+
+if(NOT DEFINED CXXBRIDGE_OUT)
+  message(FATAL_ERROR "no cxx bridge sources found!")
+endif()
+file(GLOB_RECURSE CXXBRIDGE_SOURCES ${CXXBRIDGE_OUT}/*.cc
+                                    ${CXXBRIDGE_OUT}/*.cpp
+                                    ${CXXBRIDGE_OUT}/*.c)
+message("CXXBRIDGE_SOURCES: ${CXXBRIDGE_SOURCES}")
+
+file(GLOB_RECURSE CPP_SOURCES *.cpp *.cc *.c)
+
+add_library({{to_snake_case project-name}} ${CPP_SOURCES} ${CXXBRIDGE_SOURCES})
+
+add_custom_command(TARGET {{to_snake_case project-name}}
+    COMMAND ${CMAKE_COMMAND} -E create_symlink "${CMAKE_CURRENT_BINARY_DIR}/compile_commands.json" "${CMAKE_CURRENT_LIST_DIR}/compile_commands.json"
+    DEPENDS compile_commands.json
+    VERBATIM ON
+)
