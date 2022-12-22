@@ -6,5 +6,5 @@ mod ffi {
 }
 
 fn foo() {
-    println!("foo")
+    println!("Called `foo`")
 }
