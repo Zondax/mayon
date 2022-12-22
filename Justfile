@@ -12,7 +12,7 @@ _new-deps:
 
 # Create a new crate library
 new destination: _new-deps
-    ffizer apply -s .crate-ffizer -d {{destination}}
+    ffizer apply -s .crate-ffizer -d crates/{{destination}}
 
 # Clean up project files
 clean:

@@ -1,8 +1,6 @@
 [workspace]
-members = ["hello-world"]
-exclude = ["cmake"]
-
 resolver = "2"
+members = ["crates/*"]
 
 [workspace.package]
 edition = "2021"
