@@ -1,0 +1,8 @@
+variables:
+  - name: hunter
+    ask: "Add Hunter support?"
+    select_in_values: [true, false]
+    default_value: false
+  - name: project-name
+    ask: "Library name:"
+    default_value: "{{ file_name ffizer_dst_folder }}"

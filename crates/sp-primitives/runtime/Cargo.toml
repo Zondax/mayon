@@ -1,0 +1,32 @@
+[package]
+name = "runtime"
+version = "0.1.0"
+edition.workspace = true
+links = "runtime"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+cxx = { workspace = true, features = ["c++20"], optional = true}
+
+codec = { package = "parity-scale-codec", version = "3.2.2", default-features = false, features = ["derive", "max-encoded-len"] }
+scale-info = { version = "2.1.2", default-features = false, features = ["derive"] }
+
+sp-core = { git = "https://github.com/paritytech/substrate", branch = "master", default-features = false }
+sp-runtime = { git = "https://github.com/paritytech/substrate", branch = "master", default-features = false }
+sp-std = { git = "https://github.com/paritytech/substrate", branch = "master", default-features = false }
+
+serde = { version = "1.0.136", features = ["derive"], optional = true }
+log = { version = "0.4.17", default-features = false }
+
+
+[build-dependencies]
+cmake.workspace = true
+cxx-build.workspace = true
+nix-build.workspace = true
+
+[features]
+runtime-benchmarks = []
+try-runtime = []
+default = ["std"]
+std = ["codec/std", "scale-info/std", "serde/std", "sp-std/std", "sp-runtime/std", "sp-core/std", "log/std", "dep:cxx"]

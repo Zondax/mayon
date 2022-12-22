@@ -1,0 +1,20 @@
+[workspace]
+resolver = "2"
+members = ["crates/core-primitives",
+            "crates/parachain",
+            "crates/sp-primitives/runtime",
+            # tools
+            "tools/nix-build-rs",
+
+            # extras
+            "crates/asio-poc",
+            "crates/hello-world"]
+
+[workspace.package]
+edition = "2021"
+
+[workspace.dependencies]
+cxx = "1.0.89"
+cxx-build = "1.0.89"
+cmake = "0.1"
+nix-build = { version = "0.1", path = "./tools/nix-build-rs" }
