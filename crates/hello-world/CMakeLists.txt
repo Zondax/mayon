@@ -17,14 +17,6 @@ HunterGate(
 )
 
 project(HelloWorld)
-
-# dependencies
-#hunter_add_package(libp2p)
-#find_package(libp2p REQUIRED)
-#hunter_add_package(Boost COMPONENTS system filesystem asio)
-#find_package(Boost CONFIG REQUIRED system filesystem asio)
-#target_link_libraries(Boost::system Boost::filesystem Boost::asio)
-#target_link_libraries(Boost::boost Boost::headers)
     
 
 hunter_add_package(Boost COMPONENTS system chrono timer )
@@ -39,8 +31,12 @@ file(GLOB_RECURSE CXXBRIDGE_SOURCES ${CXXBRIDGE_OUT}/*.cc
 message("CXXBRIDGE_SOURCES: ${CXXBRIDGE_SOURCES}")
 
 file(GLOB_RECURSE CPP_SOURCES *.cpp *.cc *.c)
+message("cpp files ${CPP_SOURCES}")
 
 add_library(hello_world ${CPP_SOURCES} ${CXXBRIDGE_SOURCES})
+
+set(ASIO_INCLUDE "${CMAKE_CURRENT_LIST_DIR}/../../third-party/asio/asio/include")
+target_include_directories(hello_world PUBLIC ${ASIO_INCLUDE})
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_custom_command(TARGET hello_world

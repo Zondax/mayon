@@ -1,41 +1,21 @@
-//use futures::channel::oneshot;
-use tokio::sync::mpsc::{error::TrySendError, Sender};
+use std::marker::PhantomData;
+use std::marker::PhantomPinned;
+use std::mem;
+use std::pin::Pin;
 
 #[cxx::bridge]
 mod ffi {
-    // message type that is sent  between
-    // async tasks
-    struct Message {
-        count: usize,
-        msg: String,
-    }
 
     unsafe extern "C++" {
         include!("hello-world/include/hello.h");
-
-        type CppSender;
-        type TimerTask;
-
-        fn newTimerTask(call: Box<RustSender>, interval: u64) -> *mut TimerTask;
-        unsafe fn deleteTimerTask(task: *mut TimerTask);
-
-        fn start_recv_task() -> UniquePtr<CppSender>;
 
         fn hello_from_cpp();
     }
 
     extern "Rust" {
-        type RustSender;
-
         fn hello_from_rust();
-
-        fn try_send(sender: &RustSender, msg: Message);
     }
 }
-
-pub struct RustSender(Sender<ffi::Message>);
-
-//pub use crate::ffi::{start_recv_task, start_timer_task};
 
 fn hello_from_rust() {
     println!("Hello from Rust!")
@@ -45,15 +25,58 @@ pub fn hello() {
     ffi::hello_from_cpp();
 }
 
-pub fn try_send(sender: &RustSender, msg: crate::ffi::Message) {
-    println!("sending");
-    match sender.0.try_send(msg) {
-        Ok(_) => {}
-        Err(TrySendError::Full(_)) => {
-            log::warn!("Channel full ignoring");
+// taken from project that uses cxx.
+// protobuf-native
+macro_rules! unsafe_ffi_conversions {
+    ($ty:ty) => {
+        #[allow(dead_code)]
+        pub(crate) unsafe fn from_ffi_owned(from: *mut $ty) -> Pin<Box<Self>> {
+            std::mem::transmute(from)
         }
-        Err(TrySendError::Closed(_)) => log::error!("Channel closed!"),
-    }
+
+        #[allow(dead_code)]
+        pub(crate) unsafe fn from_ffi_ptr<'_a>(from: *const $ty) -> &'_a Self {
+            std::mem::transmute(from)
+        }
+
+        #[allow(dead_code)]
+        pub(crate) fn from_ffi_ref(from: &$ty) -> &Self {
+            unsafe { std::mem::transmute(from) }
+        }
+
+        #[allow(dead_code)]
+        pub(crate) unsafe fn from_ffi_mut<'_a>(from: *mut $ty) -> Pin<&'_a mut Self> {
+            std::mem::transmute(from)
+        }
+
+        #[allow(dead_code)]
+        pub(crate) fn as_ffi(&self) -> &$ty {
+            unsafe { std::mem::transmute(self) }
+        }
+
+        #[allow(dead_code)]
+        pub(crate) fn as_ffi_mut(self: Pin<&mut Self>) -> Pin<&mut $ty> {
+            unsafe { std::mem::transmute(self) }
+        }
+
+        #[allow(dead_code)]
+        pub(crate) fn as_ffi_mut_ptr(self: Pin<&mut Self>) -> *mut $ty {
+            unsafe { std::mem::transmute(self) }
+        }
+
+        #[allow(dead_code)]
+        pub(crate) unsafe fn as_ffi_mut_ptr_unpinned(&mut self) -> *mut $ty {
+            std::mem::transmute(self)
+        }
+    };
 }
 
+mod channel;
 mod foo;
+mod future_void;
+mod timer;
+
+pub use channel::Sender;
+pub use future_void::FutureSend;
+pub use timer::{Message, TimerTask};
+pub(crate) use unsafe_ffi_conversions;

@@ -1,6 +1,12 @@
 fn main() {
     let out_dir = std::env::var("OUT_DIR").expect("OUT_DIR set during compilation");
-    let mut cxx = cxx_build::bridges(vec!["src/lib.rs", "src/foo/mod.rs"]);
+    let mut cxx = cxx_build::bridges(vec![
+        "src/lib.rs",
+        "src/foo/mod.rs",
+        "src/timer.rs",
+        "src/channel.rs",
+        "src/future_void.rs",
+    ]);
     cxx.flag_if_supported("-std=c++20");
 
     let out = cmake::Config::new(".")
