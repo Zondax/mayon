@@ -1,14 +1,26 @@
 {
+    "crane": {
+        "branch": "master",
+        "description": "A Nix library for building cargo projects. Never build twice thanks to incremental artifact caching.",
+        "homepage": "https://crane.dev",
+        "owner": "ipetkov",
+        "repo": "crane",
+        "rev": "ccea7b33178daf6010aae3ea2b3fb5b0241b9146",
+        "sha256": "0m22vri65mm6b43m16pb49gg9d4j4w2bzph3q2snbbkc95lna544",
+        "type": "tarball",
+        "url": "https://github.com/ipetkov/crane/archive/ccea7b33178daf6010aae3ea2b3fb5b0241b9146.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "fenix": {
         "branch": "main",
         "description": "Rust toolchains and rust analyzer nightly for nix [maintainer=@figsoda]",
         "homepage": "",
         "owner": "nix-community",
         "repo": "fenix",
-        "rev": "c1b7a949af9883a105b83b61cf2ae13ecd07a1a1",
-        "sha256": "08ad4f6118kqn3fgirw1wd8iyibq3jy5c2l4x8r51dhr1dah4am8",
+        "rev": "b2edf8473d14d6c6ffb2ca5e30459aa4bcd486aa",
+        "sha256": "1vf95zh0jyjiqnw0kwl02bln0g3ab4m102j7nf8357yz7ds0jvgf",
         "type": "tarball",
-        "url": "https://github.com/nix-community/fenix/archive/c1b7a949af9883a105b83b61cf2ae13ecd07a1a1.tar.gz",
+        "url": "https://github.com/nix-community/fenix/archive/b2edf8473d14d6c6ffb2ca5e30459aa4bcd486aa.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "ffizer": {
@@ -23,28 +35,16 @@
         "url": "https://github.com/ffizer/ffizer/archive/1b992ca129aac71b5defc4f8b6a7e1d66c9127a9.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "naersk": {
-        "branch": "master",
-        "description": "Build rust crates in Nix. No configuration, no code generation, no IFD. Sandbox friendly. [maintainer: @Patryk27]",
-        "homepage": "",
-        "owner": "nix-community",
-        "repo": "naersk",
-        "rev": "d998160d6a076cfe8f9741e56aeec7e267e3e114",
-        "sha256": "1s10ygdsi17zjfiypwj7bhxys6yxws10hhq3ckfl3996v2q04d3v",
-        "type": "tarball",
-        "url": "https://github.com/nix-community/naersk/archive/d998160d6a076cfe8f9741e56aeec7e267e3e114.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "nixpkgs": {
         "branch": "release-21.05",
         "description": "Nix Packages collection",
         "homepage": "",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5f244caea76105b63d826911b2a1563d33ff1cdc",
-        "sha256": "1xlgynfw9svy7nvh9nkxsxdzncv9hg99gbvbwv3gmrhmzc3sar75",
+        "rev": "022caabb5f2265ad4006c1fa5b1ebe69fb0c3faf",
+        "sha256": "12q00nbd7fb812zchbcnmdg3pw45qhxm74hgpjmshc2dfmgkjh4n",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/5f244caea76105b63d826911b2a1563d33ff1cdc.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs/archive/022caabb5f2265ad4006c1fa5b1ebe69fb0c3faf.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }

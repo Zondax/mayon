@@ -1,13 +1,13 @@
 { sources ? import ./sources.nix
 , pkgs ? import sources.nixpkgs {}
 , fenix ? import sources.fenix {}
-, naersk ? pkgs.callPackage sources.naersk {
-    cargo = fenix.stable.toolchain;
-    rustc = fenix.stable.toolchain;
-  }
+, crane ? with (import sources.crane {}); overrideToolchain fenix.stable.toolchain
 }:
-naersk.buildPackage {
+crane.buildPackage {
   src = sources.ffizer;
+
+  # package tests require access to internet
+  doCheck = false;
 
   nativeBuildInputs = with pkgs; [ pkg-config ];
   buildInputs = with pkgs; [ openssl perl ];
