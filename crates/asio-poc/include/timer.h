@@ -8,6 +8,7 @@ class TimerTask {
     public:
         TimerTask(long unsigned int interval, rust::Box<RustSender> call);//: impl(new class TimerTask::Impl(interval, call)){};
         void start();
+        void cancel();
 
     private:
         class Impl;
