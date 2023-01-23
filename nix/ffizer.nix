@@ -1,10 +1,6 @@
-{ sources ? import ./sources.nix
-, pkgs ? import sources.nixpkgs {}
-, fenix ? import sources.fenix {}
-, crane ? with (import sources.crane {}); overrideToolchain fenix.stable.toolchain
-}:
+{ pkgs, ffizer-src, crane }:
 crane.buildPackage {
-  src = sources.ffizer;
+  src = ffizer-src;
 
   # package tests require access to internet
   doCheck = false;

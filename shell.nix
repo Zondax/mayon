@@ -1,27 +1,6 @@
-{ sources ? import ./nix/sources.nix {}
-, pkgs ? import sources.nixpkgs {}
-, ffizer ? import ./nix/ffizer.nix { inherit sources; }
-}:
-
-let
-  fenix = import sources.fenix {};
-
-  deps = {
-    tools = [
-      pkgs.just
-      ffizer
-      fenix.stable.toolchain
-    ];
-
-    build = [
-      pkgs.cmake
-    ];
-  };
-in
-
-pkgs.mkShell {
-  buildInputs = builtins.concatLists [
-    deps.tools
-    deps.build
-  ];
-}
+(import (let lock = buildints.fromJSON (buildins.readFile ./flake.lock);
+in fetchTarball {
+  url =
+    "https://github.com/edolstra/flake-compat/archive/${lock.node.flake-compat.locked.rev}.tar.gz";
+  sha256 = lock.nodes.flake-compat.locked.narHash;
+}) { src = ./.; }).shellNix
