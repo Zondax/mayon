@@ -2,13 +2,15 @@
   description = "Our C++ Polkadot Host modules";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-22.05";
+    # Nix Utils
+    nixpkgs.url = "nixpkgs/nixos-22.11";
     flake-utils.url = "github:numtide/flake-utils";
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
     };
 
+    # Development dependencies
     fenix = {
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,17 +30,21 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, fenix, crane, ffizer-src, ... }:
+  outputs = inputs@{ nixpkgs, flake-utils, fenix, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = nixpkgs.legacyPackages.${system}.appendOverlays
+          [ (import ./nix/overlay.nix) ];
         rust = fenix.packages.${system}.stable.toolchain;
         ffizer = import ./nix/ffizer.nix {
-          inherit pkgs ffizer-src;
-          crane = crane.lib.${system}.overrideToolchain rust;
+          inherit pkgs;
+          src = inputs.ffizer-src;
+          crane = inputs.crane.lib.${system}.overrideToolchain rust;
         };
       in {
-        devShells.default =
-          pkgs.mkShell { buildInputs = [ pkgs.just ffizer rust pkgs.cmake ]; };
+        devShells.default = pkgs.mkShell {
+          buildInputs =
+            [ pkgs.just ffizer rust pkgs.cmake pkgs.clang pkgs.cpp-libp2p ];
+        };
       });
 }

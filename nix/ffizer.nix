@@ -1,10 +1,10 @@
-{ pkgs, ffizer-src, crane }:
+{ pkgs, src, crane }:
 crane.buildPackage {
-  src = ffizer-src;
+  inherit src;
 
   # package tests require access to internet
   doCheck = false;
 
-  nativeBuildInputs = with pkgs; [ pkg-config ];
-  buildInputs = with pkgs; [ openssl perl ];
+  nativeBuildInputs = with pkgs; [ pkg-config perl ];
+  buildInputs = with pkgs; [ openssl ];
 }
