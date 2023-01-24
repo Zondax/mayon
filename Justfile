@@ -18,15 +18,17 @@ new destination: (_run-in-nix-shell "_new" destination)
 _new destination:
     ffizer apply -s .crate-ffizer -d crates/{{destination}}
 
-
 # Clean up project files
-clean: (_run-in-nix-shell "_clean")
-_clean:
-    cargo clean
+clean:
+    just cargo clean
 
+alias c := cargo
+# Invoke cargo
+cargo *args: (_run-in-nix-shell "_cargo" args)
+_cargo *args:
+    cargo {{args}}
 
 alias b := build
 # Build project
-build *args: (_run-in-nix-shell "_build" args)
-_build *args:
-    cargo build {{args}}
+build *args:
+    just cargo build {{args}}

@@ -12,9 +12,10 @@ stdenv.mkDerivation rec {
   pname = "libp2p";
   version = "0.1.8";
 
-  nativeBuildInputs = [ gtest cmake boost172 openssl_1_1 pkg-config c-ares fmt pkg-config zlib ]
+  nativeBuildInputs = [ cmake pkg-config ];
+  buildInputs = [ gtest boost172 openssl_1_1 c-ares fmt pkg-config zlib ]
                       ++ [ soralog yaml-cpp tsl-hat-trie boost-di sqlite-modern-cpp protobuf sqlite3 microsoft_gsl_2 ];
-  buildInputs = [ openssl_1_1 ];
 
+  outputs = [ "out" "dev" ];
   cmakeFlags = [ "-DHUNTER_ENABLED=OFF" ];
 }

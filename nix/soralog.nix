@@ -7,7 +7,8 @@ stdenv.mkDerivation rec {
   version = "0.1.3";
 
   checkInputs = [ gtest ];
-  nativeBuildInputs = [ cmake fmt yaml-cpp ];
+  nativeBuildInputs = [ cmake pkg-config ];
+  buildInputs = [ fmt yaml-cpp ];
 
   cmakeFlags = [ "-DHUNTER_ENABLED=OFF" ];
 }

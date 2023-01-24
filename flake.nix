@@ -36,15 +36,23 @@
         pkgs = nixpkgs.legacyPackages.${system}.appendOverlays
           [ (import ./nix/overlay.nix) ];
         rust = fenix.packages.${system}.stable.toolchain;
+        crane = inputs.crane.lib.${system}.overrideToolchain rust;
         ffizer = import ./nix/ffizer.nix {
-          inherit pkgs;
+          inherit pkgs crane;
           src = inputs.ffizer-src;
-          crane = inputs.crane.lib.${system}.overrideToolchain rust;
+        };
+        workspace = pkgs.callPackage crane.buildPackage {
+          stdenv = pkgs.llvmPackages_14.stdenv;
+
+          src = ./.;
+          nativeBuildInputs = [ pkgs.pkg-config pkgs.cmake ];
+          buildInputs = [ pkgs.cpp-libp2p ];
         };
       in {
         devShells.default = pkgs.mkShell {
-          buildInputs =
-            [ pkgs.just ffizer rust pkgs.cmake pkgs.clang pkgs.cpp-libp2p ];
+          inputsFrom = [ workspace pkgs.cpp-libp2p ];
+          packages =
+            [ pkgs.just ffizer rust ];
         };
       });
 }

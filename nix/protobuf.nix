@@ -10,7 +10,8 @@ in stdenv.mkDerivation rec {
   version = "3.11.2";
 
   checkInputs = [ gtest ];
-  nativeBuildInputs = [ cmake zlib pkg-config ];
+  nativeBuildInputs = [ cmake pkg-config ];
+  buildInputs = [ zlib ];
 
   cmakeFlags = [ "-DHUNTER_ENABLED=OFF" build_tests-cmakeFlag ];
 

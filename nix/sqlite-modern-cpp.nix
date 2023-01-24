@@ -6,7 +6,8 @@ stdenv.mkDerivation rec {
   pname = "sqlite-modern-cpp";
   version = "v3.2.1";
 
-  nativeBuildInputs = [ sqlite3 cmake pkg-config ];
+  nativeBuildInputs = [ cmake pkg-config ];
+  buildInputs = [ sqlite3 ];
 
   cmakeFlags = [ "-DHUNTER_ENABLED=OFF" ];
 }
