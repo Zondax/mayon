@@ -48,22 +48,6 @@
         "type": "github"
       }
     },
-    "ffizer-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1671975234,
-        "narHash": "sha256-yvqGjN8E5b0I69/GP0uNFl3nqI3kU1LOAD4QGIzxEKI=",
-        "owner": "ffizer",
-        "repo": "ffizer",
-        "rev": "1b992ca129aac71b5defc4f8b6a7e1d66c9127a9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ffizer",
-        "repo": "ffizer",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -114,7 +98,6 @@
       "inputs": {
         "crane": "crane",
         "fenix": "fenix",
-        "ffizer-src": "ffizer-src",
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs"

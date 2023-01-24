@@ -1,5 +1,8 @@
-{ pkgs, src, doCheck ? true }:
-with pkgs;
+{ pkgs, src, doCheck ? true, yaml-cpp }:
+let
+  build_tests-cmakeFlag = "-DTESTING=" + (if doCheck then "ON" else "OFF");
+  build_examples-cmakeFlag = "-DEXAMPLES=" + (if doCheck then "ON" else "OFF");
+in with pkgs;
 stdenv.mkDerivation rec {
   inherit src doCheck;
 
@@ -10,5 +13,6 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ cmake pkg-config ];
   buildInputs = [ fmt yaml-cpp ];
 
-  cmakeFlags = [ "-DHUNTER_ENABLED=OFF" ];
+  cmakeFlags =
+    [ "-DHUNTER_ENABLED=OFF" build_tests-cmakeFlag build_examples-cmakeFlag ];
 }

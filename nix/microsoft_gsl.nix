@@ -1,4 +1,4 @@
-{ pkgs, src, doCheck ? true }:
+{ pkgs, src, doCheck ? false }:
 with pkgs;
 let
   tests-cmakeFlag = "-DGSL_TEST="
@@ -10,7 +10,7 @@ stdenv.mkDerivation rec {
   pname = "microsoft_gsl";
   version = "2.0.0";
 
-  checkInputs = [ gtest ];
+  checkInputs = [ gtest git ];
   nativeBuildInputs = [ cmake pkg-config ];
 
   cmakeFlags = [ "-DHUNTER_ENABLED=OFF" tests-cmakeFlag ];

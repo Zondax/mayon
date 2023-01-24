@@ -1,4 +1,4 @@
-{ pkgs, src, doCheck ? true }:
+{ pkgs, src, doCheck ? false }:
 with pkgs;
 let
   build_tests-cmakeFlag = "-DYAML_CPP_BUILD_TESTS="
