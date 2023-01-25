@@ -6,7 +6,7 @@ members = ["crates/*", "tools/nix-build-rs"]
 edition = "2021"
 
 [workspace.dependencies]
-cxx = "1.0"
-cxx-build = "1"
+cxx = "1.0.89"
+cxx-build = "1.0.89"
 cmake = "0.1"
 nix-build = { version = "0.1", path = "./tools/nix-build-rs" }
