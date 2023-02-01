@@ -47,7 +47,10 @@ void TimerTask::Impl::print()
         return;
     std::string msg("From Cpp async task!!");
     Message message = {.count = count, .msg = msg};
-    try_send(*call_, message);
+    // if this return an error we can try again
+    // unless we use and unbound channel. we can not use the async
+    // send() variant as there is not an equivalence with C++ so far.
+    (*call_).try_send(message);
     timer_.expires_at(timer_.expiry() + asio::chrono::seconds(1));
     this->print(); });
 }

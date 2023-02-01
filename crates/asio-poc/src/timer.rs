@@ -22,7 +22,7 @@ mod ffi {
     extern "Rust" {
         type RustSender;
 
-        pub fn try_send(sender: &RustSender, msg: Message);
+        pub fn try_send(self: &RustSender, msg: Message);
     }
 }
 
@@ -31,6 +31,12 @@ pub struct RustSender(Sender<ffi::Message>);
 impl RustSender {
     pub fn new(sender: Sender<ffi::Message>) -> Self {
         Self(sender)
+    }
+
+    // we should return a enum or variant indicading
+    // failure, so caller can try again
+    pub fn try_send(&self, msg: Message) {
+        self.0.try_send(msg);
     }
 }
 
