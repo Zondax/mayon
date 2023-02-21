@@ -18,7 +18,7 @@ will look for all C/C++ source file in the given location and add them as source
 
 ## ✅ poor C++ editor support
 
-Setting up a C++ project is already complicated enough, and many IDE/LSP/Tools have a somewhat 
+Setting up a C++ project is not straightforward, and many IDE/LSP/Tools have a somewhat 
 opinionated way on how things should be setup and work.
 
 The easiest and most complete way to provide proper autocompletion for each file is by 
@@ -26,7 +26,7 @@ providing the tools the [compilation database](https://clang.llvm.org/docs/JSONC
 so that the proper completion can be provided and the project can be analyzed.
 
 This is problematic in our project since the build happens from the Rust side and in Cargo's `target` folder, 
-far away from the actual source (but also alongside all the generated glue from cxx), 
+far away from the actual source (but alongside all the generated glue from cxx), 
 thus even if we tell CMake to export the compilation database it will be exported in the wrong place 
 (there's no way to tell where the database should be exported, as it's hardcoded to be exported where the build is happening).
 
