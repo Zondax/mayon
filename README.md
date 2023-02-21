@@ -1,6 +1,6 @@
 # Mayon Repository
 
-This repository will contain all our C++ code, as well as the wrapping Rust crates that will be depended on by our node fork.
+This repository will contain all of our C++ code, as well as the wrapping Rust crates that will be depended on by our fork of the Polkadot node.
 The idea is to have a central repository with all our modules and then make it painless and seamless to integrate with the existing node, simply by depending to the corresponding crate in the repository.
 
 # How crates are built
