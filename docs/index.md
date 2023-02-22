@@ -27,7 +27,7 @@ This project will *not* provide a working alternative node. Instead, it will con
 
 As a proof of concept, we will also select a specific component (such as Keystore) and will show how our development process and be effectively used to progressively evolve the existing Parity node. 
 
-Last but not least, a member our our research team will analyse existing specifications looking for possible gaps and risky areas. The objective is to determine possible mitigations and alternative plans beforehand.
+Last but not least, a member of our research team will analyse existing specifications looking for possible gaps and risky areas. The objective is to determine possible mitigations and alternative plans beforehand.
 
 
 ## Technology and Languages
