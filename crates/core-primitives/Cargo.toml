@@ -1,6 +1,6 @@
 [package]
 name = "polkadot-core-primitives"
-version = "0.1.0"
+version = "0.9.37"
 edition.workspace = true
 links = "core_primitives"
 
