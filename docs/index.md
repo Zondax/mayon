@@ -4,6 +4,8 @@ sidebar_position: 1
 ---
 
 :::info The following project has been funded by the [Web3 Foundation](https://web3.foundation/).
+The grant application is publicly available [here](https://github.
+com/w3f/Grants-Program/blob/master/applications/hybrid_node_research.md).
 
 <img
 src={require('./web3grant.png').default}
