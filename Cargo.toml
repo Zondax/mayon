@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["crates/*"]
+members = ["crates/*", "tools/nix-build-rs"]
 
 [workspace.package]
 edition = "2021"
@@ -9,3 +9,4 @@ edition = "2021"
 cxx = "1.0"
 cxx-build = "1"
 cmake = "0.1"
+nix-build = { version = "0.1", path = "./tools/nix-build-rs" }
