@@ -3,20 +3,16 @@ cmake_policy(SET CMP0048 NEW)
 cmake_policy(SET CMP0135 NEW)
 
 project(HelloWorld)
-
-# dependencies
-find_package(libp2p REQUIRED)
-
-if(NOT DEFINED CXXBRIDGE_OUT)
-  message(FATAL_ERROR "no cxx bridge sources found!")
-endif()
+set(CXXBRIDGE_OUT ${CMAKE_INSTALL_PREFIX}/cxxbridge/sources CACHE PATH)
 file(GLOB_RECURSE CXXBRIDGE_SOURCES ${CXXBRIDGE_OUT}/*.cc
                                     ${CXXBRIDGE_OUT}/*.cpp
                                     ${CXXBRIDGE_OUT}/*.c)
 message("CXXBRIDGE_SOURCES: ${CXXBRIDGE_SOURCES}")
 
-file(GLOB_RECURSE CPP_SOURCES *.cpp *.cc *.c)
+# dependencies
+find_package(libp2p REQUIRED)
 
+file(GLOB_RECURSE CPP_SOURCES *.cpp *.cc *.c)
 add_library(hello_world ${CPP_SOURCES} ${CXXBRIDGE_SOURCES})
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
