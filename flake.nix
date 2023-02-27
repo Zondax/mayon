@@ -27,7 +27,7 @@
   outputs = inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" "aarch64-darwin" "x86_64-darwin" ];
-      perSystem = { inputs', pkgs, ... }:
+      perSystem = { self', inputs', pkgs, ... }:
         let
           rust = inputs'.fenix.packages.stable.toolchain;
           crane = (inputs.crane.mkLib pkgs).overrideToolchain rust;
@@ -36,6 +36,7 @@
           tools = pkgs.callPackage ./nix/tools.nix { inherit crane; };
 
           workspace = crane.buildPackage {
+            pname = "mayon";
             src = ./.;
 
             nativeBuildInputs = [ pkgs.pkg-config pkgs.cmake ];
@@ -43,9 +44,12 @@
           };
         in {
           devShells.default = pkgs.mkShell {
-            inputsFrom = [ workspace deps.cpp-libp2p ];
+            inputsFrom = [ workspace ];
             packages = [ pkgs.just rust tools.ffizer pkgs.niv ];
           };
+
+          packages.mayon = workspace;
+          packages.default = self'.packages.mayon;
         };
     };
 
