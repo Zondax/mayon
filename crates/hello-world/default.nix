@@ -3,19 +3,18 @@
 , cpp-libp2p ? (import ../../nix/deps.nix { inherit pkgs; }).cpp-libp2p
 }:
 let
-  pname = "hello-world";
-  src = ./.;
-  cxxbridge = import ../cxxbridge.nix { inherit pkgs;
-                                        src = cxxbridge-out;
-                                        crate-src = src;
-                                        crate-name = pname; };
+  cxxbridge = import ../cxxbridge.nix { inherit pkgs crate;
+                                        src = cxxbridge-out; };
+  crate =
+    pkgs.stdenv.mkDerivation {
+      pname = "hello-world";
+      version = "0.1.0";
+      src = ./.;
+
+      cmakeFlags = [ "-DHUNTER_ENABLED=OFF" "-DCXXBRIDGE_OUT=${cxxbridge}" ];
+
+      nativeBuildInputs = [ pkgs.pkg-config pkgs.cmake ];
+      buildInputs = [ cpp-libp2p ];
+    };
 in
-pkgs.stdenv.mkDerivation {
-  inherit pname src;
-  version = "0.1.0";
-
-  cmakeFlags = [ "-DHUNTER_ENABLED=OFF" "-DCXXBRIDGE_OUT=${cxxbridge}" ];
-
-  nativeBuildInputs = [ pkgs.pkg-config pkgs.cmake cpp-libp2p ];
-  buildInputs = [ cpp-libp2p ];
-}
+crate
