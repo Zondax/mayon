@@ -68,6 +68,12 @@ impl Config {
         match &self.nixfile {
             NixTarget::File(file) => {
                 cmd.args(&[OsStr::new("-f"), &file]);
+
+                // make sure the build script is rerun if the file changes
+                println!(
+                    "cargo:rerun-if-changed={}",
+                    AsRef::<Path>::as_ref(file).display()
+                );
             }
             NixTarget::Flake(name) => {
                 cmd.arg(&name);

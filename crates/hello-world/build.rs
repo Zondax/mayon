@@ -7,7 +7,10 @@ fn main() {
     let cxx = cxx_build::bridges(vec!["src/lib.rs", "src/foo/mod.rs"]);
 
     let out = if nix::is_nix_available().is_some() {
-        nix::Config::new(".").build().expect("nix build ok")
+        nix::Config::new(".")
+            .add_arg("cxxbridge-out", &cxxbridge_out)
+            .build()
+            .expect("nix build ok")
     } else {
         println!("cargo:rerun-if-changed=CMakeLists.txt");
         cmake::Config::new(".")
