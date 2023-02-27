@@ -13,11 +13,15 @@ stdenv.mkDerivation rec {
 
   pname = "libp2p";
   version = "0.1.8";
+  enableParallelBuilding = true;
 
   checkInputs = [ gtest ];
   nativeBuildInputs = [ cmake pkg-config ];
   buildInputs = [ boost172 openssl_1_1 c-ares fmt pkg-config zlib ]
                       ++ [ soralog yaml-cpp tsl-hat-trie boost-di sqlite-modern-cpp protobuf sqlite3 microsoft_gsl_2 ];
+
+  propagatedBuildInputs = [ boost172 openssl_1_1 c-ares fmt zlib ]
+                          ++ [ protobuf yaml-cpp soralog tsl-hat-trie boost-di sqlite-modern-cpp sqlite3 ];
 
   outputs = [ "out" "dev" ];
   cmakeFlags = [ "-DHUNTER_ENABLED=OFF" build_tests-cmakeFlag build_examples-cmakeFlag ];
