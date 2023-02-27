@@ -18,6 +18,7 @@ fn main() {
             .build_target("hello_world")
             .profile("RelWithDebInfo")
             .define("CXXBRIDGE_OUT", &cxxbridge_out)
+            .define("HUNTER_ENABLED", "ON")
             .build()
     };
 

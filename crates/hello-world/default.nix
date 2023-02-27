@@ -14,7 +14,7 @@ pkgs.stdenv.mkDerivation {
   inherit pname src;
   version = "0.1.0";
 
-  cmakeFlags = [ "-DCXXBRIDGE_OUT=${cxxbridge}" ];
+  cmakeFlags = [ "-DHUNTER_ENABLED=OFF" "-DCXXBRIDGE_OUT=${cxxbridge}" ];
 
   nativeBuildInputs = [ pkgs.pkg-config pkgs.cmake cpp-libp2p ];
   buildInputs = [ cpp-libp2p ];
