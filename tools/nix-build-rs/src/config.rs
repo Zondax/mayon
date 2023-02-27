@@ -22,6 +22,7 @@ pub struct Config {
     path: PathBuf,
     nixfile: NixTarget,
     exprs: Vec<(String, String)>,
+    exprs_strs: Vec<(String, String)>,
     out_dir: PathBuf,
 }
 
@@ -31,13 +32,20 @@ impl Config {
             path: std::env::current_dir().unwrap().join(path.as_ref()),
             nixfile: NixTarget::default(),
             exprs: vec![("pkgs".to_owned(), "import <nixpkgs> {}".to_owned())],
+            exprs_strs: vec![],
             out_dir: PathBuf::from(crate::abort::getenv_unwrap("OUT_DIR")),
         }
     }
 
-    /// Add an argument to the invoked nix expression
-    pub fn add_arg(&mut self, name: &str, value: &str) -> &mut Self {
+    /// Add an expression argument to the invoked nix expression
+    pub fn add_expr(&mut self, name: &str, value: &str) -> &mut Self {
         self.exprs.push((name.to_owned(), value.to_owned()));
+        self
+    }
+
+    /// Add a string argument to the invoked nix expression
+    pub fn add_str_arg(&mut self, name: &str, value: &str) -> &mut Self {
+        self.exprs_strs.push((name.to_owned(), value.to_owned()));
         self
     }
 
@@ -83,6 +91,13 @@ impl Config {
         for (key, val) in &self.exprs {
             cmd.args(&["--arg", &key, &val]);
         }
+
+        for (key, val) in &self.exprs_strs {
+            cmd.args(&["--argstr", &key, &val]);
+        }
+
+        //show build logs
+        cmd.arg("-L");
 
         if !cmd
             .spawn()

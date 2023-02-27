@@ -19,6 +19,7 @@ else()
 endif()
 
 project(HelloWorld)
+
 set(CXXBRIDGE_OUT ${CMAKE_INSTALL_PREFIX}/cxxbridge CACHE PATH "")
 message("CXXBRIDGE: ${CXXBRIDGE_OUT}")
 file(GLOB_RECURSE CXXBRIDGE_SOURCES ${CXXBRIDGE_OUT}/sources/*.cc
@@ -33,6 +34,7 @@ include_directories(${CXXBRIDGE_OUT}/include ${CXXBRIDGE_OUT}/crate)
 hunter_add_package(libp2p)
 find_package(libp2p REQUIRED)
 
+# library
 file(GLOB_RECURSE CPP_SOURCES *.cpp *.cc *.c)
 add_library(hello_world ${CPP_SOURCES} ${CXXBRIDGE_SOURCES})
 install(TARGETS hello_world)

@@ -1,0 +1,19 @@
+{ pkgs
+, cxxbridge-out
+}:
+let
+  cxxbridge = import ../cxxbridge.nix { inherit pkgs crate;
+                                        src = cxxbridge-out; };
+  crate =
+    pkgs.stdenv.mkDerivation {
+      pname = "{{to_kebab_case project-name}}";
+      version = "0.1.0";
+      src = ./.;
+
+      cmakeFlags = [ "-DHUNTER_ENABLED=OFF" "-DCXXBRIDGE_OUT=${cxxbridge}" ];
+
+      nativeBuildInputs = [ pkgs.pkg-config pkgs.cmake ];
+      buildInputs = [ ];
+    };
+in
+crate

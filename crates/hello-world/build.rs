@@ -8,7 +8,7 @@ fn main() {
 
     let out = if nix::is_nix_available().is_some() {
         nix::Config::new(".")
-            .add_arg("cxxbridge-out", &cxxbridge_out)
+            .add_expr("cxxbridge-out", &cxxbridge_out)
             .build()
             .expect("nix build ok")
     } else {
