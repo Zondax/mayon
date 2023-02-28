@@ -22,13 +22,13 @@ repository, we can run the test suite defined in Parity's repository.
 So far running Parity's `cargo` tests on our hybrid node is successful.
 
 To run the aforementioned tests, clone our fork of the polkadot host node, 
-and checkout the `hybrid_node` branch:
+and checkout the `poc_hybrid` branch:
 
 ```
 git clone git@github.com:Zondax/polkadot.git
-git checkout hybrid_node
+git checkout poc_hybrid
 ```
 
-Then follow the [README](https://github.com/Zondax/polkadot/blob/hybrid_node/README.md) instructions to build and test the project. 
+Then follow the [README](https://github.com/Zondax/polkadot/blob/poc_hybrid/README.md) instructions to build and test the project. 
 As the code-base evolves, one should use our already defined C++ testing 
 framework, and add additional unit tests while writing C++ code. 
