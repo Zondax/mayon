@@ -4,6 +4,7 @@ let
   cxxbridge = ./crates/cxxbridge.nix;
   only-dirs = pkgs.lib.attrsets.filterAttrs
     (_: v: builtins.isAttrs v) crates;
+  # TODO: fix and look for nested manifests as well?
   manifests = pkgs.lib.attrsets.mapAttrs
     (_: v: v."default.nix") only-dirs;
   packages = pkgs.lib.attrsets.mapAttrs
