@@ -9,7 +9,7 @@ To call asynchronous C++ code from Rust, we will need to write the asynchronous 
 handled at the level of C++ code. For example, using [`Asio`](https://think-async.com/Asio/), callbacks will be registered in C++ as completion handlers, and those callbacks will need to interact with Rust code through the FFI.
 
 In order to make a proper assessment regarding interoperability between Rust 
-async and C++ async paradigm, we decided to write a [proof of concept](https://github.com/Zondax/mayon/tree/poc/crates/asio-poc),
+async and C++ async paradigm, we decided to write a [proof of concept](https://github.com/Zondax/mayon/tree/main/crates/asio-poc),
 that has asynchronous Rust tasks interacting with C++ tasks using [`Asio`](https://think-async.com/Asio/). The tasks use async channels to talk to each other, this model resembles the current Polkadot design which makes use of channels also to decouple subsystems.
 
 Overall, using `cxx` to call asynchronous C++ code from Rust is possible, 

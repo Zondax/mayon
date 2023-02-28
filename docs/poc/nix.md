@@ -12,7 +12,9 @@ For this reason, we had initially investigated having a build script encapsulate
 With Hunter, one can manage dependencies for  CMake projects and automatically fetch the dependencies one need for a project.
 Indeed, when using Hunter, one specifies the version of Hunter one wants to use in the CMake project. Hunter then uses this information to determine the correct versions of the dependencies needed, and fetches them. This eliminates the need to manually download and manage dependencies.
 
-Another option we have looked into is using `Nix` to handle the dependencies and build of the C++ libraries. An application to the `mayon` repository can be found in branch [`deps/nix`](https://github.com/Zondax/mayon/tree/deps/nix).
+Another option we have looked into is using `Nix` to handle the dependencies 
+and build of the C++ libraries. An application to `mayon` can be found in the  
+[`nix`](https://github.com/Zondax/mayon/tree/main/nix) repository.
 
 `Nix` is a powerful package manager that offers several benefits for managing project dependencies. It ensures reproducible builds,
 allows for easy creation of isolated development environments and can be used for different programming languages, including C++ and Rust. Its atomic upgrades and rollbacks, along with its declarative configuration format, make it a reliable and convenient tool for managing dependencies.

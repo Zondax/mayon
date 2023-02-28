@@ -3,8 +3,8 @@
 This repository will contain all of our C++ code, as well as the wrapping Rust crates that will be depended on by our fork of the Polkadot node.
 The idea is to have a central repository with all our modules and then make it painless and seamless to integrate with the existing node, simply by depending to the corresponding crate in the repository.
 
-# Proof of concept branches
-### The core_primitives branch
+# Proofs of concepts
+### The core_primitives re-write
 While analyzing the code stability we observed that some important crates in the
 Polkadot node depend on _primitives_ modules. The primitives are mostly
 re-exports of types that are defined in Substrate but with a concrete type bound.
@@ -13,26 +13,25 @@ process is going to be. We selected two primitives crates as follows:
 - [`core-primitives`](https://github.com/paritytech/polkadot/tree/master/core-primitives)
 - [`parachain primitives`](https://github.com/paritytech/polkadot/blob/master/parachain/src/primitives.rs)
 
-The [`core_primitives`](https://github.com/Zondax/mayon/tree/core_primitives/) 
-branch contains our re-write of
-[`core-primitives`](https://github.com/Zondax/mayon/tree/core_primitives/crates/core-primitives) and 
-[`parachain`](https://github.com/Zondax/mayon/tree/core_primitives/crates/parachain).
+The [`crates`](https://github.com/Zondax/mayon/tree/main/crates) 
+repository contains our re-write of
+[`core-primitives`](https://github.com/Zondax/mayon/tree/main/crates/core-primitives) and 
+[`parachain`](https://github.com/Zondax/mayon/tree/main/crates/parachain).
 
-### The deps/nix branch
+### Reproducible builds with `Nix`
 To handle the dependencies and build of
-the C++ libraries, we have looked into is using `Nix`. An application to the 
-`mayon` repository can be found in branch [`deps/nix`](https://github.com/Zondax/mayon/tree/deps/nix).
+the C++ libraries, we have looked into is using `Nix`. An application to 
+`mayon` can be found in the [`nix`](https://github.com/Zondax/mayon/tree/main/nix) repository.
 
 `Nix` is a powerful package manager that offers several benefits for managing project dependencies. 
 It ensures reproducible builds,
 allows for easy creation of isolated development environments and can be used 
 for different programming languages, including C++ and Rust.
 
-### The poc branch
+### Asynchronous C++/Rust tasks with Asio
 In order to make a proper assessment regarding interoperability between Rust
-async and C++ async paradigms,
-in the `poc` branch, we wrote a 
-[proof of concept](https://github.com/Zondax/mayon/tree/poc/crates/asio-poc) 
+async and C++ async paradigms, we wrote a 
+[proof of concept](https://github.com/Zondax/mayon/tree/main/crates/asio-poc) 
 that has asynchronous Rust tasks interacting with C++ 
 tasks using 
 [`Asio`](https://think-async.com/Asio/). 
