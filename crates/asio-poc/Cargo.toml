@@ -16,3 +16,4 @@ tokio-stream = { version = "0.1" }
 [build-dependencies]
 cxx-build = { workspace = true }
 cmake = { workspace = true }
+nix-build = { workspace = true }
