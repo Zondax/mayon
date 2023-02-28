@@ -11,10 +11,10 @@ let
         (name: _: tree { inherit pkgs; path = path + "/${name}"; maxDepth = recMaxDepth; })
         only-dirs;
 
-      only-files = pkgs.lib.attrsets.filterAttrs
-        (_: v: v == "regular") root;
+      files-and-links = pkgs.lib.attrsets.filterAttrs
+        (_: v: v == "regular" || v == "symlink") root;
       files = pkgs.lib.attrsets.mapAttrs
-        (name: _: path + "/${name}") only-files;
+        (name: _: path + "/${name}") files-and-links;
     in
       root // dirs // files;
 in
