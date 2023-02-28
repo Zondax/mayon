@@ -34,7 +34,7 @@
 
           deps = pkgs.callPackage ./nix/deps.nix { };
           tools = pkgs.callPackage ./nix/tools.nix { inherit crane; };
-          crates = pkgs.callPackage ./crates/default.nix { };
+          crates = pkgs.callPackage ./nix/crates.nix { src = ./crates; };
 
           workspace = crane.buildPackage {
             pname = "mayon";

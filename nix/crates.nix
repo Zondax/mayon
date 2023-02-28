@@ -1,6 +1,7 @@
-inputs@{ pkgs, ... }:
+inputs@{ pkgs, src, ... }:
 let
-  crates = import ./tree.nix { inherit pkgs; path = ./.; maxDepth = 1; };
+  crates = import ./tree.nix { inherit pkgs; path = src; maxDepth = 1; };
+  cxxbridge = ./crates/cxxbridge.nix;
   only-dirs = pkgs.lib.attrsets.filterAttrs
     (_: v: builtins.isAttrs v) crates;
   manifests = pkgs.lib.attrsets.mapAttrs
@@ -10,7 +11,7 @@ let
       let
         has_overrides = pkgs.lib.attrsets.hasAttrByPath [ name ] inputs;
         overrides = if has_overrides then pkgs.lib.attrsets.getAttrFromPath [ name ] inputs else { };
-      in pkgs.callPackage v overrides) manifests;
+      in pkgs.callPackage v ({ inherit cxxbridge; } // overrides)) manifests;
   packagesList = pkgs.lib.attrsets.attrValues packages;
 
   # taken from mkShell implementation
