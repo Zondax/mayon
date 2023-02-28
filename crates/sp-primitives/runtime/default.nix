@@ -1,6 +1,6 @@
 { pkgs
 , cxxbridge-out
-, cxxbridge ? ../../nix/crates/cxxbridge.nix
+, cxxbridge ? ../../../nix/crates/cxxbridge.nix
 }:
 let
   cxxbridge-drv = pkgs.callPackage cxxbridge { inherit crate; src = cxxbridge-out; };

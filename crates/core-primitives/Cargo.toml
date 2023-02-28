@@ -19,8 +19,9 @@ futures = "0.3.25"
 tokio-stream = { version = "0.1" }
 
 [build-dependencies]
-cxx-build = { workspace = true }
-cmake = { workspace = true }
+cxx-build.workspace = true
+cmake.workspace = true
+nix-build.workspace = true
 
 [features]
 default = [ "std" ]

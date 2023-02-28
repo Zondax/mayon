@@ -22,8 +22,9 @@ derive_more = "0.99.11"
 serde = { version = "1.0.137", default-features = false, features = [ "derive" ], optional = true }
 
 [build-dependencies]
-cxx-build = { workspace = true }
-cmake = { workspace = true }
+cxx-build.workspace = true
+cmake.workspace = true
+nix-build.workspace = true
 
 [features]
 default = ["std"]

@@ -1,6 +1,14 @@
 [workspace]
 resolver = "2"
-members = ["crates/*", "tools/nix-build-rs"]
+members = ["crates/core-primitives",
+            "crates/parachain",
+            "crates/sp-primitives/runtime",
+            # tools
+            "tools/nix-build-rs",
+
+            # extras
+            "crates/asio-poc",
+            "crates/hello-world"]
 
 [workspace.package]
 edition = "2021"

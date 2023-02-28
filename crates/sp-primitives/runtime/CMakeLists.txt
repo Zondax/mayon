@@ -23,7 +23,7 @@ include_directories(${CXXBRIDGE_OUT}/include ${CXXBRIDGE_OUT}/crate)
 
 file(GLOB_RECURSE CPP_SOURCES *.cpp *.cc *.c)
 add_library(runtime ${CPP_SOURCES} ${CXXBRIDGE_SOURCES})
-install(TARGETS primitives)
+install(TARGETS runtime)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_custom_command(TARGET runtime

@@ -2,7 +2,7 @@ fn main() {
     let out_dir = std::env::var("OUT_DIR").expect("OUT_DIR set during compilation");
     let cxxbridge_out = format!("{out_dir}/cxxbridge");
 
-    let mut cxx = cxx_build::bridges(vec!["src/timer.rs", "src/channel.rs", "src/future_void.rs"]);
+    let cxx = cxx_build::bridges(vec!["src/timer.rs", "src/channel.rs", "src/future_void.rs"]);
 
     let out = if nix_build::is_nix_available().is_some() {
         nix_build::Config::new(".")
