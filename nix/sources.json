@@ -1,0 +1,122 @@
+{
+    "boost-di": {
+        "branch": "cpp14",
+        "description": "[Boost].DI: C++14 Dependency Injection Library",
+        "homepage": "https://boost-experimental.github.io/di",
+        "owner": "masterjedy",
+        "repo": "di",
+        "rev": "a20eebb6decfba55867a6920e00443a9485f50cd",
+        "sha256": "0fswqjhz2174v12v62ki1zlw31xg2i8f0c59kwskak46fkyl26vr",
+        "type": "tarball",
+        "url": "https://github.com/masterjedy/di/archive/a20eebb6decfba55867a6920e00443a9485f50cd.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "cpp-libp2p": {
+        "branch": "v0.1.8",
+        "description": "C++17 implementation of libp2p",
+        "homepage": null,
+        "owner": "libp2p",
+        "repo": "cpp-libp2p",
+        "rev": "5e13b979eaccd9f9dac358a76046af20d70d539c",
+        "sha256": "1y2vllfmmfbh8a87sk5mzi5a7f3dr50aslmbzi7b6jsq7dy2w6yp",
+        "type": "tarball",
+        "url": "https://github.com/libp2p/cpp-libp2p/archive/5e13b979eaccd9f9dac358a76046af20d70d539c.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "ffizer": {
+        "branch": "master",
+        "description": "ffizer is a files and folders initializer / generator. Create any kind (or part) of project from template.",
+        "homepage": "https://ffizer.github.io/",
+        "owner": "ffizer",
+        "repo": "ffizer",
+        "rev": "1b992ca129aac71b5defc4f8b6a7e1d66c9127a9",
+        "sha256": "18hhy661h41y03754lz4inlffp8nim5kzinzxc4bvr84vy68dyna",
+        "type": "tarball",
+        "url": "https://github.com/ffizer/ffizer/archive/1b992ca129aac71b5defc4f8b6a7e1d66c9127a9.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "libp2p-sqlite-modern-cpp": {
+        "branch": "hunter",
+        "description": "The C++14 wrapper around sqlite library (This repository is managed by Terraform!)",
+        "homepage": "",
+        "owner": "soramitsu",
+        "repo": "libp2p-sqlite-modern-cpp",
+        "rev": "fc3b700064cb57ab6b598c9bc7a12b2842f78da2",
+        "sha256": "0r5b3w0lawbyd5pa31jhj0jyz52viqabijdyykw5p9n4gninrw21",
+        "type": "tarball",
+        "url": "https://github.com/soramitsu/libp2p-sqlite-modern-cpp/archive/fc3b700064cb57ab6b598c9bc7a12b2842f78da2.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "microsoft_gsl_2": {
+        "branch": "v2.0.0-p0",
+        "description": "Guidelines Support Library",
+        "homepage": null,
+        "owner": "hunter-packages",
+        "repo": "Microsoft.GSL",
+        "rev": "a22ae286a369f5bb48977a8b9dffe3edb754885c",
+        "sha256": "1yhbgadp69df38aqi577fidfbq4y6icl0zxkjn4118znahdwxvvl",
+        "type": "tarball",
+        "url": "https://github.com/hunter-packages/Microsoft.GSL/archive/a22ae286a369f5bb48977a8b9dffe3edb754885c.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "protobuf": {
+        "branch": "v3.11.2-p0",
+        "description": "Protocol Buffers - Google's data interchange format",
+        "homepage": "https://developers.google.com/protocol-buffers/",
+        "owner": "cpp-pm",
+        "repo": "protobuf",
+        "rev": "f47400024be6bbd42decb3d29d28afcddc1736cc",
+        "sha256": "15vwz14qmka0g32i62pd44c88h6hsib0ai1mkx393nnsq6rpvj46",
+        "type": "tarball",
+        "url": "https://github.com/cpp-pm/protobuf/archive/f47400024be6bbd42decb3d29d28afcddc1736cc.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "soralog": {
+        "branch": "v0.1.3",
+        "description": "Fast&flex logger for Soramitsu LABS",
+        "homepage": "",
+        "owner": "soramitsu",
+        "repo": "soralog",
+        "rev": "0faa9c78c303051abbda42bcdb360423eba032d1",
+        "sha256": "1qdmaj02d7q4653r3gw9dhdky6x2f5pnzr6wsd1rlcmcqwz1n5gs",
+        "type": "tarball",
+        "url": "https://github.com/soramitsu/soralog/archive/0faa9c78c303051abbda42bcdb360423eba032d1.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "sqlite3": {
+        "branch": "hunter-3.30.1",
+        "description": null,
+        "homepage": null,
+        "owner": "cpp-pm",
+        "repo": "sqlite3",
+        "rev": "e712ed5615f0554ee8ac5df6fb9e5cc0fada942c",
+        "sha256": "0j65dgav145b3hb4xk24wmnzdrgsinmy7m0rdv31v6a2ww9qjhw0",
+        "type": "tarball",
+        "url": "https://github.com/cpp-pm/sqlite3/archive/e712ed5615f0554ee8ac5df6fb9e5cc0fada942c.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "tsl-hat-trie": {
+        "branch": "master",
+        "description": "C++ implementation of a fast and memory efficient HAT-trie",
+        "homepage": null,
+        "owner": "masterjedy",
+        "repo": "hat-trie",
+        "rev": "4fdfc75e75276185eed4b748ea09671601101b8e",
+        "sha256": "0mh2dna1cnfpyx5w1yl15kl9qqrapzm76hyia5r9f40ijw9r71z2",
+        "type": "tarball",
+        "url": "https://github.com/masterjedy/hat-trie/archive/4fdfc75e75276185eed4b748ea09671601101b8e.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "yaml-cpp": {
+        "branch": "v0.6.2-0f9a586-p1",
+        "description": "A YAML parser and emitter in C++",
+        "homepage": "",
+        "owner": "hunter-packages",
+        "repo": "yaml-cpp",
+        "rev": "c953835e451d2cf70926478ae615928190f6bcdd",
+        "sha256": "1pwasjkxi9d6cnr774ff7pjpzzfjnrsz545lsmb52n52g3czmj5f",
+        "type": "tarball",
+        "url": "https://github.com/hunter-packages/yaml-cpp/archive/c953835e451d2cf70926478ae615928190f6bcdd.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    }
+}

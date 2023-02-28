@@ -1,0 +1,15 @@
+[package]
+name = "nix-build"
+version = "0.1.0"
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+keywords = ["build-dependencies"]
+documentation = "https://docs.rs/nix-build"
+description = """
+A build dependency for running `nix` to build a package
+"""
+categories = ["development-tools::build-utils"]
+edition = "2021"
+
+[dependencies]
+which = "4"
