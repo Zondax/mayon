@@ -99,6 +99,9 @@ impl Config {
         //show build logs
         cmd.arg("-L");
 
+        // enable split commands and flakes
+        cmd.args(&["--experimental-features", "nix-command flakes"]);
+
         if !cmd
             .spawn()
             .expect("unable to spawn build job")
