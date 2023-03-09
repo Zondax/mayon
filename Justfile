@@ -37,3 +37,7 @@ build *args:
 docker name="mayon":
     just cargo clean
     docker build -t {{name}} .
+
+# Run the test docker image
+run-docker name="mayon":
+    docker run --rm mayon --net=host
