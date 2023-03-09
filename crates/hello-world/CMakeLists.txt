@@ -35,7 +35,10 @@ hunter_add_package(libp2p)
 find_package(libp2p REQUIRED)
 
 # library
-file(GLOB_RECURSE CPP_SOURCES *.cpp *.cc *.c)
+file(GLOB_RECURSE CPP_SOURCES src/*.cpp
+                              src/*.cc
+                              src/*.c)
+message("SOURCES: ${CPP_SOURCES}")
 add_library(hello_world ${CPP_SOURCES} ${CXXBRIDGE_SOURCES})
 install(TARGETS hello_world)
 

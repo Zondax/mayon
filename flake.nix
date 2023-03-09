@@ -36,13 +36,19 @@
           tools = pkgs.callPackage ./nix/tools.nix { inherit crane; };
           crates = pkgs.callPackage ./nix/crates.nix { src = ./crates; };
 
-          workspace = crane.buildPackage {
-            pname = "mayon";
+          commonArgs = {
             src = ./.;
 
             nativeBuildInputs = [ pkgs.pkg-config pkgs.cmake ];
             buildInputs = [ deps.cpp-libp2p ];
           };
+          cargoArtifacts = crane.buildDepsOnly commonArgs;
+          workspace = crane.buildPackage (commonArgs // {
+            src = ./.;
+            pname = "mayon";
+
+            inherit cargoArtifacts;
+          });
         in {
           devShells.default = pkgs.mkShell {
             inputsFrom = [ workspace ];

@@ -40,7 +40,9 @@ include_directories(${CXXBRIDGE_OUT}/include ${CXXBRIDGE_OUT}/crate)
 hunter_add_package(Boost COMPONENTS system chrono timer)
 find_package(Boost CONFIG REQUIRED system chrono timer)
 
-file(GLOB_RECURSE CPP_SOURCES *.cpp *.cc *.c)
+file(GLOB_RECURSE CPP_SOURCES src/*.cpp
+                              src/*.cc
+                              src/*.c)
 add_library(cpp_asio_poc ${CPP_SOURCES} ${CXXBRIDGE_SOURCES})
 target_include_directories(cpp_asio_poc PRIVATE asio)
 install(TARGETS cpp_asio_poc)

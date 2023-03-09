@@ -21,7 +21,9 @@ message("CXXBRIDGE_SOURCES: ${CXXBRIDGE_SOURCES}")
 # project includes
 include_directories(${CXXBRIDGE_OUT}/include ${CXXBRIDGE_OUT}/crate)
 
-file(GLOB_RECURSE CPP_SOURCES *.cpp *.cc *.c)
+file(GLOB_RECURSE CPP_SOURCES src/*.cpp
+                              src/*.cc
+                              src/*.c)
 add_library(polkadot_parachain ${CPP_SOURCES} ${CXXBRIDGE_SOURCES})
 install(TARGETS polkadot_parachain)
 
