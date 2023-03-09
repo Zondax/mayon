@@ -32,3 +32,8 @@ alias b := build
 # Build project
 build *args:
     just cargo build {{args}}
+
+# Create docker image (used to run tests)
+docker name="mayon":
+    just cargo clean
+    docker build -t {{name}} .
