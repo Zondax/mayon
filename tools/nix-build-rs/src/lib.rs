@@ -39,11 +39,13 @@ pub fn is_nix_available() -> Option<PathBuf> {
 /// ```no_run
 /// use nix_build as nix;
 ///
+/// # fn main() -> Result<(), nix::Error> {
 /// let dst = nix::build("libfoo")?;
 ///
 /// println!("cargo:rustc-link-search=native={}", dst.display());
 /// println!("cargo:rustc-link-lib=static=foo");
+/// # Ok(()) }
 /// ```
-pub fn build(path: &Path) -> Result<PathBuf> {
+pub fn build(path: impl AsRef<Path>) -> Result<PathBuf> {
     Config::new(path).build()
 }
