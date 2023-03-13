@@ -3,5 +3,10 @@ FROM nixos/nix:latest
 WORKDIR /mayon
 COPY . .
 
-ENTRYPOINT nix --experimental-features 'nix-command flakes' develop \
-    --command bash -c "cargo test"
+RUN nix-store --import < nix-shell.closure
+RUN rm nix-shell.closure
+
+# Prepare build environment and prefetch dependencies
+RUN nix-shell --run "cargo fetch"
+
+ENTRYPOINT nix-shell
