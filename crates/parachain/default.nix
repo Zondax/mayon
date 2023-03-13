@@ -1,10 +1,11 @@
-{ pkgs, cxxbridge-out, cxxbridge ? ../../nix/crates/cxxbridge.nix }:
+{ pkgs, stdenv ? pkgs.stdenv, cxxbridge-out
+, cxxbridge ? ../../nix/crates/cxxbridge.nix }:
 let
   cxxbridge-drv = pkgs.callPackage cxxbridge {
     inherit crate;
     src = cxxbridge-out;
   };
-  crate = pkgs.stdenv.mkDerivation {
+  crate = stdenv.mkDerivation {
     pname = "polkadot-parachain";
     version = "0.1.0";
     src = ./.;

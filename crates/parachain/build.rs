@@ -11,11 +11,11 @@ fn compile_lib() {
     let cxx = cxx_build::bridges(vec!["src/primitives_ffi.rs"]);
 
     let out = if nix_build::is_nix_available().is_some() {
+        let nixpkgs = nix_build::exprs::nixpkgs_from_flake("../../flake.lock", None);
+
         nix_build::Config::new(".")
-            .add_expr(
-                "pkgs",
-                &nix_build::exprs::nixpkgs_from_flake("../../flake.lock", None),
-            )
+            .add_expr("pkgs", &nixpkgs)
+            .add_expr("stdenv", &format!("({nixpkgs}).clangStdenv"))
             .add_expr("cxxbridge-out", &cxxbridge_out)
             .build()
             .expect("nix build ok")
