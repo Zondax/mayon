@@ -33,6 +33,7 @@ alias b := build
 build *args:
     just cargo build {{args}}
 
+empty_closure := "AQAAAAAAAAANAAAAAAAAAG5peC1hcmNoaXZlLTEAAAABAAAAAAAAACgAAAAAAAAABAAAAAAAAAB0eXBlAAAAAAcAAAAAAAAAcmVndWxhcgAIAAAAAAAAAGNvbnRlbnRz0AAAAAAAAABEZXJpdmUoWygib3V0IiwiL25peC9zdG9yZS96aGhuZDlnamQ0bHlzNzdweTJtOXc2OXZ5MWJtY2t3MS1lbXB0eSIsIiIsIiIpXSxbXSxbXSwiYWxsIiwib2siLFtdLFsoImJ1aWxkZXIiLCJvayIpLCgibmFtZSIsImVtcHR5IiksKCJvdXQiLCIvbml4L3N0b3JlL3poaG5kOWdqZDRseXM3N3B5Mm05dzY5dnkxYm1ja3cxLWVtcHR5IiksKCJzeXN0ZW0iLCJhbGwiKV0pAQAAAAAAAAApAAAAAAAAAE5JWEUAAAAANQAAAAAAAAAvbml4L3N0b3JlLzk0NWpzYTQyOTR2aWZ5ODlrcDhna2JtdndnMHpuZDZxLWVtcHR5LmRydgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 with_closure := env_var_or_default("JUST_WITH_NIX_SHELL_CLOSURE", "false")
 __with-maybe-nix-shell-closure cmd *args:
     #!/usr/bin/env -S sh -eu
@@ -44,7 +45,7 @@ __with-maybe-nix-shell-closure cmd *args:
             nix-store --export $SHELL_INPUTS > nix-shell.closure
         else
             # stub out
-            echo "" > nix-shell.closure
+            echo {{empty_closure}} | base64 -d - > nix-shell.closure
         fi
         export JUST_WITH_NIX_SHELL_CLOSURE=true
     fi
