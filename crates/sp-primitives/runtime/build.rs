@@ -12,6 +12,10 @@ fn compile_lib() {
 
     let out = if nix_build::is_nix_available().is_some() {
         nix_build::Config::new(".")
+            .add_expr(
+                "pkgs",
+                &nix_build::exprs::nixpkgs_from_flake("../../../flake.lock", None),
+            )
             .add_expr("cxxbridge-out", &cxxbridge_out)
             .build()
             .expect("nix build ok")

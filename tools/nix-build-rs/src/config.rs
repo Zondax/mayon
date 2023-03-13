@@ -31,7 +31,7 @@ impl Config {
         Self {
             path: std::env::current_dir().unwrap().join(path.as_ref()),
             nixfile: NixTarget::default(),
-            exprs: vec![("pkgs".to_owned(), "import <nixpkgs> {}".to_owned())],
+            exprs: vec![],
             exprs_strs: vec![],
             out_dir: PathBuf::from(crate::abort::getenv_unwrap("OUT_DIR")),
         }

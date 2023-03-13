@@ -3,6 +3,9 @@ use std::path::{Path, PathBuf};
 mod config;
 pub use config::Config;
 
+/// Collection of Nix expressions useful for package configuration
+pub mod exprs;
+
 mod abort;
 
 #[derive(Debug)]
