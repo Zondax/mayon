@@ -33,11 +33,30 @@ alias b := build
 build *args:
     just cargo build {{args}}
 
-# Create docker image (used to run tests)
-docker name="mayon":
-    just cargo clean
-    docker build -t {{name}} .
+with_closure := env_var_or_default("JUST_WITH_NIX_SHELL_CLOSURE", "false")
+__with-maybe-nix-shell-closure cmd *args:
+    #!/usr/bin/env -S sh -eu
+    if [ "{{ with_closure }}" = "false" ] && [ ! -e nix-shell.closure ]; then
+        if command -v nix-instantiate; then
+            SHELLFILE="shell.nix"
+            SHELL_DRV=`nix-instantiate $SHELLFILE`
+            SHELL_INPUTS=`nix-store -qR --include-outputs $SHELL_DRV`
+            nix-store --export $SHELL_INPUTS > nix-shell.closure
+        else
+            # stub out
+            echo "" > nix-shell.closure
+        fi
+        export JUST_WITH_NIX_SHELL_CLOSURE=true
+    fi
+    just "{{ root_dir }}/{{ cmd }}" {{ args }}
+    rm nix-shell.closure || true
 
+# Create docker image (used to run tests)
+docker name="mayon": (__with-maybe-nix-shell-closure "_docker" name)
+_docker name="mayon":
+    docker build -t {{name}} --network=host .
+
+alias run := run-docker
 # Run the test docker image
 run-docker name="mayon":
-    docker run --rm mayon --net=host
+    docker run -it --rm --net=host mayon bash
