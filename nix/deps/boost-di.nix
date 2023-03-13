@@ -8,5 +8,6 @@ stdenv.mkDerivation rec {
   doCheck = false;
 
   nativeBuildInputs = [ cmake ];
-  cmakeFlags = [ "-DBOOST_DI_OPT_BUILD_TESTS=OFF" "-DBOOST_DI_OPT_BUILD_EXAMPLES=OFF" ];
+  cmakeFlags =
+    [ "-DBOOST_DI_OPT_BUILD_TESTS=OFF" "-DBOOST_DI_OPT_BUILD_EXAMPLES=OFF" ];
 }

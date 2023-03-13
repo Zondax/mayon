@@ -15,6 +15,7 @@ let
       src = sources.libp2p-sqlite-modern-cpp;
     };
     protobuf = callPackage ./deps/protobuf.nix { src = sources.protobuf; };
-    cpp-libp2p = callPackage ./deps/cpp-libp2p.nix { src = sources.cpp-libp2p; };
+    cpp-libp2p =
+      callPackage ./deps/cpp-libp2p.nix { src = sources.cpp-libp2p; };
   };
 in packages

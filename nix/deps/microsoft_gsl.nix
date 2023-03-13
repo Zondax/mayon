@@ -1,10 +1,7 @@
 { pkgs, src, doCheck ? false }:
 with pkgs;
-let
-  tests-cmakeFlag = "-DGSL_TEST="
-    + (if doCheck then "ON" else "OFF");
-in
-stdenv.mkDerivation rec {
+let tests-cmakeFlag = "-DGSL_TEST=" + (if doCheck then "ON" else "OFF");
+in stdenv.mkDerivation rec {
   inherit src doCheck;
 
   pname = "microsoft_gsl";
