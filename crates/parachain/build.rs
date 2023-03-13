@@ -15,7 +15,6 @@ fn compile_lib() {
 
         nix_build::Config::new(".")
             .add_expr("pkgs", &nixpkgs)
-            .add_expr("stdenv", &format!("({nixpkgs}).clangStdenv"))
             .add_expr("cxxbridge-out", &cxxbridge_out)
             .build()
             .expect("nix build ok")
