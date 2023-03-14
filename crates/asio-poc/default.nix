@@ -4,6 +4,14 @@ let
     inherit crate;
     src = cxxbridge-out;
   };
+  asio = pkgs.asio.overrideAttrs (_: rec {
+    version = "1.27.0";
+    src = pkgs.fetchurl {
+      url = "mirror://sourceforge/asio/asio-${version}.tar.bz2";
+      sha256 =
+        "918da9e9eca6dd10431432c73ec7ed1347aeda31a64f38917eb2a4501c8195e1";
+    };
+  });
   crate = pkgs.stdenv.mkDerivation {
     pname = "cpp-asio-poc";
     version = "0.1.0";
@@ -12,6 +20,6 @@ let
     cmakeFlags = [ "-DHUNTER_ENABLED=OFF" "-DCXXBRIDGE_OUT=${cxxbridge-drv}" ];
 
     nativeBuildInputs = [ pkgs.pkg-config pkgs.cmake ];
-    buildInputs = [ pkgs.asio ];
+    buildInputs = [ asio ];
   };
 in crate

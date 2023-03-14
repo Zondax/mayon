@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.14.7)
 project(asio LANGUAGES CXX)
 
 option(asio_GIT_REPOSITORY "asio git repository URL" "https://github.com/chriskohlhoff/asio")
-option(asio_GIT_TAG "asio git commit hash" "a71f5232d207b4f3bbd253eb1041e30b5e4ea606")
+option(asio_GIT_TAG "asio git commit hash" "f693a3eb7fe72a5f19b975289afc4f437d373d9c")
 
 include(FetchContent)
 FetchContent_Declare(asio
