@@ -67,3 +67,9 @@ An example `hello-world` crate is also present,
 which is what the template is based off and shows how it can be used as a dependency 
 (in the [`bin/hello_world.rs`](./crates/hello-world/src/bin/hello_world.rs) file), 
 as there's no need for any special machinery to build and use the crate.
+
+# Final report
+
+Our final research report can be found [here](https://github.com/Zondax/mayon/blob/main/docs/report/HybridHost_Zondax_Report.pdf)
+
+It  summarizes our findings and analysis to create an alternate host node for the Polkadot network, using a hybrid and progressive approach. 
