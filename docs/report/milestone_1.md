@@ -9,7 +9,7 @@ sidebar_position: 2
 
 ## Deliverables
 
-This mock libraries includes the following features - [Let's go to the ](https://github.com/Zondax/filecoin-solidity/tree/master/contracts/v0.8/mocks) :arrow_upper_right:
+This repository contains the work done - [Let's go to the ](https://github.com/Zondax/mayon) :arrow_upper_right:
 
 
 | Number | Deliverable | Specification                                                                                                                                                                                                                                                                                           | Link                                                                                                             |
