@@ -1,21 +1,31 @@
 use nix_build as nix;
 
 fn main() {
-    let out_dir = std::env::var("OUT_DIR").expect("OUT_DIR set during compilation");
-    let cxxbridge_out = format!("{out_dir}/cxxbridge");
-
-    let cxx = cxx_build::bridges(vec!["src/lib.rs", "src/foo/mod.rs"]);
-
     let out = if nix::is_nix_available().is_some() {
+        let lockfile = "../../flake.lock";
+
+        let pkgs = nix::exprs::nixpkgs_from_flake(lockfile, None);
+        let fenix = nix::exprs::package_from_flake(lockfile, "fenix");
+        let crane = nix::exprs::package_from_flake(lockfile, "crane");
+        let crane = nix::exprs::nix_let(
+            &[
+                &format!("rust = ({fenix}).stable.toolchain"),
+                &format!("crane = ({crane})"),
+            ],
+            "crane.overrideToolchain rust",
+        );
+
         nix::Config::new(".")
-            .add_expr(
-                "pkgs",
-                &nix::exprs::nixpkgs_from_flake("../../flake.lock", None),
-            )
-            .add_expr("cxxbridge-out", &cxxbridge_out)
+            .add_expr("pkgs", &pkgs)
+            .add_expr("crane", &crane)
             .build()
             .expect("nix build ok")
     } else {
+        let out_dir = std::env::var("OUT_DIR").expect("OUT_DIR set during compilation");
+        let cxxbridge_out = format!("{out_dir}/cxxbridge");
+
+        let cxx = cxx_build::bridges(vec!["src/lib.rs", "src/foo/mod.rs"]);
+
         println!("cargo:rerun-if-changed=CMakeLists.txt");
         cmake::Config::new(".")
             .init_cxx_cfg(cxx)

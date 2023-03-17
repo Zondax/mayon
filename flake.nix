@@ -43,25 +43,27 @@
             src = ./.;
 
             nativeBuildInputs = [ pkgs.pkg-config pkgs.cmake ];
-            buildInputs = [ deps.cpp-libp2p ];
+            buildInputs = [ ];
           };
           cargoArtifacts = crane.buildDepsOnly commonArgs;
           workspace = crane.buildPackage (commonArgs // {
             src = ./.;
             pname = "mayon";
 
+            buildInputs = [ crates.hello-world ];
             inherit cargoArtifacts;
           });
         in {
           devShells.default = pkgs.mkShell {
             inputsFrom = [ workspace ];
-            packages = [ pkgs.just rust tools.ffizer pkgs.niv ];
+            packages =
+              [ pkgs.just rust tools.ffizer tools.cxxbridge-cmd pkgs.niv ];
           };
 
           packages.mayon = workspace;
           packages.default = self'.packages.mayon;
 
-          packages.crates = crates;
+          packages.hello = crates.hello-world;
         };
     };
 
