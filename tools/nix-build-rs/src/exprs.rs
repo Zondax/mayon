@@ -1,22 +1,44 @@
 use std::path::Path;
 
-const GITHUB_LOCKED_NIXPKGS: &str = std::include_str!("exprs/github_locked_nixpkgs.nix");
+const GITHUB_LOCKED_PACKAGE: &str = std::include_str!("exprs/github_locked_package.nix");
+
+/// Returns an expression that will evaluate to the `package` specified by the given flake lock file
+///
+/// The references are assumed to be github references
+pub fn package_from_flake(lockfile: impl AsRef<Path>, package: &str) -> String {
+    let path = lockfile.as_ref().display();
+
+    format!(
+        r##"
+let
+    package = ({GITHUB_LOCKED_PACKAGE}) {{ lockPath = {path}; package = {package:?}; }};
+in
+    import package {{}}
+"##
+    )
+}
 
 /// Returns an expression that will evaluate to the nixpkgs set specified by the given flake lock file
 ///
 /// `nixpkgs_name` will default to "nixpkgs", but should match the flake input name that is to be used
 pub fn nixpkgs_from_flake(lockfile: impl AsRef<Path>, nixpkgs_name: Option<&str>) -> String {
-    let path = lockfile.as_ref().display();
-    let nixpkgs = nixpkgs_name.unwrap_or("nixpkgs");
+    package_from_flake(lockfile, nixpkgs_name.unwrap_or("nixpkgs"))
+}
 
-    format!(
-        r##"
-let
-    lock = builtins.fromJSON (builtins.readFile {path});
-    nixpkgs_node = lock.nodes.{nixpkgs}.locked;
-    nixpkgs = ({GITHUB_LOCKED_NIXPKGS}) {{ rev = nixpkgs_node.rev; sha256 = nixpkgs_node.narHash; }};
-in
-    import nixpkgs {{}}
-"##
-    )
+/// Run the given `expr` in a context where `lets` are expanded in order.
+///
+/// # Example
+/// ```rust
+/// # use nix_build::exprs::nix_let;
+/// let expr = nix_let(&["foo = 1", "bar = 2"], "foo + bar");
+///
+/// assert_eq!(expr,
+/// format!("let foo = 1;
+/// bar = 2;
+///  in foo + bar"))
+/// ```
+pub fn nix_let(lets: &[&str], expr: &str) -> String {
+    let declarations = lets.join(";\n");
+
+    format!("let {declarations};\n in {expr}")
 }
