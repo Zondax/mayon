@@ -7,5 +7,13 @@ let
       inherit crane;
       src = sources.ffizer;
     };
+    cxxbridge-cmd = callPackage ./tools/cxxbridge-cmd.nix {
+      inherit crane;
+      src = pkgs.fetchCrate {
+        crateName = "cxxbridge-cmd";
+        version = "1.0.92";
+        sha256 = "sha256-+iyfWrkltOrMSFfrlZuY79xQqns5F4bnAZPhCoKMsCY=";
+      };
+    };
   };
 in packages

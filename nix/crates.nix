@@ -1,11 +1,10 @@
-inputs@{ pkgs, src, ... }:
+inputs@{ pkgs, src, crane, ... }:
 let
   crates = import ./tree.nix {
     inherit pkgs;
     path = src;
     maxDepth = 1;
   };
-  cxxbridge = ./crates/cxxbridge.nix;
   only-dirs = pkgs.lib.attrsets.filterAttrs (_: v: builtins.isAttrs v) crates;
   # TODO: fix and look for nested manifests as well?
   manifests = pkgs.lib.attrsets.mapAttrs (_: v: v."default.nix") only-dirs;
@@ -16,7 +15,7 @@ let
         pkgs.lib.attrsets.getAttrFromPath [ name ] inputs
       else
         { };
-    in pkgs.callPackage v ({ inherit cxxbridge; } // overrides)) manifests;
+    in pkgs.callPackage v ({ inherit crane; } // overrides)) manifests;
   packagesList = pkgs.lib.attrsets.attrValues packages;
 
   # taken from mkShell implementation

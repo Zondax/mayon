@@ -34,7 +34,10 @@
 
           deps = pkgs.callPackage ./nix/deps.nix { };
           tools = pkgs.callPackage ./nix/tools.nix { inherit crane; };
-          crates = pkgs.callPackage ./nix/crates.nix { src = ./crates; };
+          crates = pkgs.callPackage ./nix/crates.nix {
+            inherit tools crane;
+            src = ./crates;
+          };
 
           commonArgs = {
             src = ./.;
