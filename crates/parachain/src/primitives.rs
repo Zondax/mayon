@@ -401,9 +401,9 @@ pub struct ValidationResult {
     /// An update to the validation code that should be scheduled in the relay chain.
     pub new_validation_code: Option<ValidationCode>,
     /// Upward messages send by the Parachain.
-    pub upward_messages: Vec<UpwardMessage>,
+    pub upward_messages: UpwardMessages,
     /// Outbound horizontal messages sent by the parachain.
-    pub horizontal_messages: Vec<OutboundHrmpMessage<Id>>,
+    pub horizontal_messages: HorizontalMessages,
     /// Number of downward messages that were processed by the Parachain.
     ///
     /// It is expected that the Parachain processes them from first to last.
