@@ -20,8 +20,8 @@ Polkadot node depend on _primitives_ modules. The primitives are mostly
 re-exports of types that are defined in Substrate but with a concrete type bound.
 This makes the primitives crates a good target to get an insight on how this
 process is going to be. We selected two primitives crates as follows:
-- [`core-primitives`](https://github.com/paritytech/polkadot/tree/master/core-primitives)
-- [`parachain primitives`](https://github.com/paritytech/polkadot/blob/master/parachain/src/primitives.rs)
+- [`core-primitives`](https://github.com/paritytech/polkadot/tree/polkadot-v0.9.39/core-primitives)
+- [`parachain primitives`](https://github.com/paritytech/polkadot/blob/polkadot-v0.9.39/parachain/src/primitives.rs)
 
 The [`crates`](https://github.com/Zondax/mayon/tree/main/crates) 
 repository contains our re-write of
