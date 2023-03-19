@@ -12,6 +12,7 @@ members = ["crates/core-primitives",
 
 [workspace.package]
 edition = "2021"
+version = "0.9.39"
 
 [workspace.dependencies]
 cxx = "1.0.89"

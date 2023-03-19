@@ -1,17 +1,18 @@
 [package]
 name = "polkadot-core-primitives"
-version = "0.9.37"
+version.workspace = true 
 edition.workspace = true
 links = "core_primitives"
 
 [dependencies]
 cxx = { workspace = true , optional = true }
 
-sp-core = { git = "https://github.com/paritytech/substrate", branch = "master", default-features = false }
-sp-std = { git = "https://github.com/paritytech/substrate", branch = "master", default-features = false }
-sp-runtime = { git = "https://github.com/paritytech/substrate", branch = "master", default-features = false }
+sp-core = { git = "https://github.com/paritytech/substrate", default-features = false , branch = "polkadot-v0.9.39" }
+sp-std = { git = "https://github.com/paritytech/substrate", default-features = false , branch = "polkadot-v0.9.39" }
+sp-runtime = { git = "https://github.com/paritytech/substrate", default-features = false , branch = "polkadot-v0.9.39" }
 scale-info = { version = "2.1.2", default-features = false, features = ["derive"] }
-parity-scale-codec = { version = "3.1.5", default-features = false, features = [ "derive" ] }
+parity-scale-codec = { version = "3.3.0", default-features = false, features = [ "derive" ] }
+
 runtime = {path = "../sp-primitives/runtime/", default-features = false}
 
 [dev-dependencies]

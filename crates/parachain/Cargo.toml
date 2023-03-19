@@ -1,8 +1,9 @@
 [package]
 name = "polkadot-parachain"
-version = "0.1.0"
-links = "polkadot_parachain"
+description = "Types and utilities for creating and working with parachains"
 edition.workspace = true
+version.workspace = true
+links = "polkadot_parachain"
 
 [dependencies]
 cxx = { workspace = true , optional = true }
@@ -11,12 +12,13 @@ cxx = { workspace = true , optional = true }
 # various unnecessary Substrate-specific endpoints.
 parity-scale-codec = { version = "3.3.0", default-features = false, features = [ "derive" ] }
 scale-info = { version = "2.1.2", default-features = false, features = ["derive"] }
-sp-std = { git = "https://github.com/paritytech/substrate", branch = "master", default-features = false }
-sp-runtime = { git = "https://github.com/paritytech/substrate", branch = "master", default-features = false }
-sp-core = { git = "https://github.com/paritytech/substrate", branch = "master", default-features = false }
-frame-support = { git = "https://github.com/paritytech/substrate", branch = "master", default-features = false }
+sp-std = { git = "https://github.com/paritytech/substrate", default-features = false , branch = "polkadot-v0.9.39" }
+sp-runtime = { git = "https://github.com/paritytech/substrate", default-features = false , branch = "polkadot-v0.9.39" }
+sp-core = { git = "https://github.com/paritytech/substrate", default-features = false , branch = "polkadot-v0.9.39" }
+frame-support = { git = "https://github.com/paritytech/substrate", default-features = false , branch = "polkadot-v0.9.39" }
 polkadot-core-primitives = { path = "../core-primitives", default-features = false }
 derive_more = "0.99.11"
+bounded-collections = { version = "0.1.5", default-features = false }
 
 # all optional crates.
 serde = { version = "1.0.137", default-features = false, features = [ "derive" ], optional = true }
@@ -30,6 +32,7 @@ nix-build.workspace = true
 default = ["std"]
 wasm-api = []
 std = [
+	"bounded-collections/std",
 	"parity-scale-codec/std",
 	"scale-info/std",
 	"serde/std",
@@ -38,6 +41,6 @@ std = [
 	"sp-core/std",
 	"polkadot-core-primitives/std",
 	"frame-support/std",
-  "dep:cxx"
+    "dep:cxx"
 ]
 runtime-benchmarks = []
